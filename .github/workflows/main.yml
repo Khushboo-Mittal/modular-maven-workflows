@@ -7,6 +7,6 @@ on:
 
 jobs:
   call-ci-core:
-    uses: ./.github/workflows/ci-core.yaml
+    uses: ./.github/workflows/ci-core.yml
     with:
       java-version: '17'
