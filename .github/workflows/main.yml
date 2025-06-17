@@ -1,0 +1,12 @@
+name: Test CI Core
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  call-ci-core:
+    uses: ./.github/workflows/ci-core.yaml
+    with:
+      java-version: '17'
