@@ -14,7 +14,8 @@ jobs:
   code-quality:
     needs: ci-core
     uses: ./.github/workflows/code-quality.yml
-         artifact-path: ${{ needs.ci-core.outputs.artifact-path }}
+    with:
+      artifact-path: ${{ needs.ci-core.outputs.artifact-path }}
 
   integration-tests:
     needs: ci-core
