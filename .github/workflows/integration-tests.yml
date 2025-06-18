@@ -1,0 +1,39 @@
+name: Integration and Service Tests
+
+on:
+  workflow_call:
+    inputs:
+      java-version:
+        required: false
+        type: string
+        default: '17'
+        description: "Java version to use"
+      artifact-path:
+        required: false
+        type: string
+        description: "Path to the built artifact (optional)"
+
+jobs:
+  integration-tests:
+    name: Run Integration Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Set up JDK
+        uses: actions/setup-java@main
+        with:
+          java-version: ${{ inputs.java-version }}
+          distribution: 'temurin'
+
+      - name: Run Integration Tests
+        run: mvn verify -Pintegration-tests
+
+      - name: Upload Integration Test Results
+        if: always()
+        uses: actions/upload-artifact@main
+        with:
+          name: integration-test-results
+          path: target/failsafe-reports/
