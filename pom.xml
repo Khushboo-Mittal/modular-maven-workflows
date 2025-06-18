@@ -10,7 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
-        <finalName>
+        <finalName>sample-maven-project</finalName>
         <plugins>
             <!-- Checkstyle plugin for code quality -->
             <plugin>
