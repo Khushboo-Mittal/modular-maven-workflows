@@ -37,3 +37,27 @@ jobs:
         with:
           name: checkstyle-report
           path: target/checkstyle-result.xml
+
+  spotbugs:
+    name: Run SpotBugs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Set up JDK
+        uses: actions/setup-java@main
+        with:
+          java-version: ${{ inputs.java-version }}
+          distribution: 'temurin'
+
+      - name: Run SpotBugs
+        run: mvn spotbugs:check
+
+      - name: Upload SpotBugs Report
+        if: always()
+        uses: actions/upload-artifact@main
+        with:
+          name: spotbugs-report
+          path: target/spotbugsXml.xml
