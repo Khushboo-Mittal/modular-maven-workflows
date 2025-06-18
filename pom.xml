@@ -60,17 +60,17 @@
                 <version>4.7.3.0</version>
                 <configuration>
                     <xmlOutput>true</xmlOutput>
-                    <xmlOutputDirectory>${project.build.directory}</xmlOutputDirectory>
-                    <outputFile>spotbugsXml.xml</outputFile>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                    <xmlOutputDirectory>${project.build.directory}</xmlOutputDirectory>
+                    <outputFile>spotbugsXml.xml</outputFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
