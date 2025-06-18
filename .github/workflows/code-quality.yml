@@ -1,0 +1,39 @@
+name: Code Quality Workflow
+
+on:
+  workflow_call:
+    inputs:
+      java-version:
+        required: false
+        type: string
+        default: '17'
+        description: "Java version to use"
+      artifact-path:
+        required: false
+        type: string
+        description: "Path to the built artifact (optional)"
+
+jobs:
+  checkstyle:
+    name: Run Checkstyle
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Set up JDK
+        uses: actions/setup-java@main
+        with:
+          java-version: ${{ inputs.java-version }}
+          distribution: 'temurin'
+
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
+
+      - name: Upload Checkstyle Report
+        if: always()
+        uses: actions/upload-artifact@main
+        with:
+          name: checkstyle-report
+          path: target/checkstyle-result.xml

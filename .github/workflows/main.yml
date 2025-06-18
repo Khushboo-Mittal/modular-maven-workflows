@@ -1,4 +1,4 @@
-name: Test CI Core
+name: Main CI Pipeline
 
 on:
   push:
@@ -6,7 +6,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  call-ci-core:
+  ci-core:
     uses: ./.github/workflows/ci-core.yml
     with:
       java-version: '17'
+
+  code-quality:
+    needs: ci-core
+    uses: ./.github/workflows/code-quality.yml
+    with:
+      java-version: '17'
+      artifact-path: ${{ needs.ci-core.outputs.artifact-path }}
